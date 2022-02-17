@@ -14,8 +14,6 @@
  * machine.
  */
 
-// finish this shit
-
 #include "catch_setup.h"
 
 int main(int argc, char** argv) {
