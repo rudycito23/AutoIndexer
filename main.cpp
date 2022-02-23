@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "DSString.h"
 
 /**
  * catch_setup.h and catch_setup.cpp contain the #define directive for
