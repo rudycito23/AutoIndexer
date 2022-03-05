@@ -13,6 +13,7 @@
 #include <ostream>
 #include <unordered_map>
 #include <map>
+#include <cctype>
 
 using std::cout;
 using std::cin;
@@ -48,7 +49,7 @@ private:
      *    the c-string functions.
      **/
      char* word;
-     int num{0};
+     int num;
 
 
 public:
@@ -131,6 +132,8 @@ public:
     //
     //Further - you will be able to update and modify this class as the
     //semester progresses.
+
+    bool does_contain_keyword(DSString);
 
 };
 

@@ -3,7 +3,8 @@
 #include "DSString.h"
 
 DSString::DSString() {  // constructor when no string is created
-    
+    word = nullptr;
+    num = 0;
 }
 
 DSString::DSString(const char* anotherWord) {  // constructor
@@ -113,7 +114,23 @@ char *DSString::c_str() {
 }
 // function will print out what is in DSString, overloading insertion operator
     ostream &operator<<(ostream &output, const DSString &newString) {
-        output << newString.word << endl;
+        output << newString.word;
         return output;
+}
+
+bool DSString::does_contain_keyword(DSString keywords) {
+    for (int i = 0; i < this->getLength(); ++i) {
+        bool match = true;
+        for (int j = 0; j < keywords.getLength(); ++j) {
+            if (!((*this)[i + j] == keywords[j])) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            return true;
+        }
+    }
+    return false;
 }
 
