@@ -58,7 +58,6 @@ bool DSString::operator==(const char * rightSide) const {
     // compare the left char* with the right char*, return if equal
     return strcmp(word, rightSide) == 0;
 }
-//
 // overload comparison operator
 bool DSString::operator==(const DSString &rightSide) const {
     // compare the left DSString with right DSString, return if equal
@@ -79,24 +78,20 @@ bool DSString::operator>(const DSString &rightSide) const {
 }
 // overload the > operator
 bool DSString::operator>(const char * rightSide) const {
-    // save both sizes of char* on the left and right side
-    int sizeOfRightSide = strlen(rightSide);
-    int sizeOfLeftSide = strlen(word);
-    // if size of left side is bigger than size of right side
-    bool leftIsBigger = sizeOfLeftSide > sizeOfRightSide;
-    // return true
-    return leftIsBigger;
+    return strcmp(word, rightSide) > 0;
 }
 // overload the [] operator
-char &DSString::operator[](const int index) {
+char &DSString::operator[](const int index) const {
     // condition if the index is valid
     if (index >= strlen(word)) {
-        cout << "Invalid entry - you are out of bounds" << endl;
-    } else {
+        throw std::out_of_range("Vector index is out of bounds");
+    }
+    else {
         // return what is in the index
         return word[index];
     }
 }
+
 int DSString::getLength() {
     return strlen(word);
 }
@@ -122,7 +117,7 @@ bool DSString::does_contain_keyword(DSString keywords) {
     for (int i = 0; i < this->getLength(); ++i) {
         bool match = true;
         for (int j = 0; j < keywords.getLength(); ++j) {
-            if (!((*this)[i + j] == keywords[j])) {
+            if (i + j >= this->getLength() || !((*this)[i + j] == keywords[j])) {
                 match = false;
                 break;
             }
@@ -132,5 +127,18 @@ bool DSString::does_contain_keyword(DSString keywords) {
         }
     }
     return false;
+}
+
+bool DSString::operator<(const DSString &rightSide) const {
+    // save both sizes of char* on the left and right side
+    return strcasecmp(word, rightSide.word) < 0;
+}
+
+char DSString::toUpperCase(char letter) {
+    return toupper(letter);
+}
+
+char DSString::toLowerCase(char letter) {
+    return tolower(letter);
 }
 

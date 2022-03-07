@@ -51,9 +51,9 @@ public:
         }
         return *this;
     }
-    theType& operator [] (const int index) {                // overload insertion [] operator
+    theType operator [] (const int index) {                // overload insertion [] operator
         if (index >= size) {                                // if index >= size, then invalid entry
-            cout << "Invalid entry - you are out of bounds." << endl;
+            throw std::out_of_range("Vector index is out of bounds");
         }
         else {
             return data[index];                             // else, return the data within the index

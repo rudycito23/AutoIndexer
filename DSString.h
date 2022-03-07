@@ -51,9 +51,7 @@ private:
      char* word;
      int num;
 
-
 public:
-
     /**
      * Constructors and destructor
      *
@@ -95,7 +93,7 @@ public:
      * Subscript operator to access a particular character of a DSString object
      * @return the character requested by reference
      */
-    char& operator[] (const int);
+    char& operator[] (const int) const;
 
     /**
      * getLength() returns the number (count) of characters in the string.
@@ -134,9 +132,7 @@ public:
     //semester progresses.
 
     bool does_contain_keyword(DSString);
-
+    static char toUpperCase(char);
+    static char toLowerCase(char);
 };
-
-
-
 #endif //PA01_SENTIMENT_DSSTRING_H

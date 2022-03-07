@@ -4,6 +4,7 @@ Preface:
 Advanced Data Structures and Algorithm Implementation is a new exciting text from Mustang Publishers aimed at upper division
 undergraduate courses or introductory graduate courses.
 <4>
+There are 2-3 trees in the backyard.
 Some of the topics covered are:
 * Fast String Matching
 * B+ Tree Implementation

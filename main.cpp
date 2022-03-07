@@ -19,24 +19,23 @@
 #include "catch_setup.h"
 
 int main(int argc, char** argv) {
-//    if(argc == 1) {
-        runCatchTests();
-//    }
-//    else {
-//        std::cout << "Hello, 2341 students!" << std::endl;
-//        std::cout << "Attempting to open and write to " << argv[2] << std::endl;
-//        std::ofstream o(argv[2]);
-//        o << "Writing to output file." << std::endl;
-//        o.close();
-//  }
-//    Keywords object;
-//    object.getKeyWordsFromSampleFile("./data/terms.txt");
-//    for (int i = 0; i < object.keywords.getVectorSize(); ++i) {
-//        cout << object.keywords[i];
-//    }
+    if(argc == 1) {
+    runCatchTests();
+    }
+    else {
+        Keywords read;
+        read.getKeywordsFromSampleFile(argv[2]);
+        read.readBookFile(argv[1]);
 
-//Keywords readFile;
-//readFile.readBookFile("./data/test_book.txt");
-
+        ofstream outputFile;
+        outputFile.open(argv[3]);
+        if (!outputFile.is_open()) {
+            cout << "Could not open file." << endl;
+            return 1;
+        }
+        else {
+            read.printOutputFile(outputFile);
+        }
+    }
     return 0;
 }
