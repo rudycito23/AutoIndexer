@@ -63,9 +63,7 @@ public:
         if (size >= capacity) {                             // if size >= capacity, then resize vector
             resize();
         }
-        else {                                              // else, place info into data
-            data[size] = info;
-        }
+        data[size] = info;                                  // else, place info into data
         size++;
     }
     int findIndex(const theType& info) {                    // find a specific element and be able to remove it
@@ -101,7 +99,6 @@ public:
         }
     }
 };
-
 // remove an element from the vector - DONE
 // create a find function that will return the index where the element is within the vector. If it doesn't exist
 // return -1 - DONE

@@ -12,17 +12,17 @@ void Keywords::getKeywordsFromSampleFile(char *fileName) {
     if (!keywordFile.is_open()) {
         cout << "Could not open file.";
     }
-    char oneLineOfData[80];     // one line of data with up to 80 characters
-    while (keywordFile.getline(oneLineOfData, 80, '\n')) {  // while the condition is satisfied
+    char oneLineOfData[1000];     // one line of data with up to 80 characters
+    while (keywordFile.getline(oneLineOfData, 1000, '\n')) {  // while the condition is satisfied
         keywords.pushBack(DSString(oneLineOfData));     // add data in oneLineOfData to my vector of DSString
     }
 }
 
 void Keywords::readBookFile(char *fileName) {
-    char oneLineOfData[150];               // one line = 150 characters
+    char oneLineOfData[1000];               // one line = 150 characters
     ifstream bookFile(fileName);        // read the book file
     DSString pageNumber;                  // page numbers
-    while (bookFile.getline(oneLineOfData, 150, '\n')) {    // while my condition is satisfied
+    while (bookFile.getline(oneLineOfData, 1000, '\n')) {    // while my condition is satisfied
         for (int i = 0; i < strlen(oneLineOfData); ++i) {       // iterate through oneLineOfData
             oneLineOfData[i] = DSString::toLowerCase(oneLineOfData[i]);     // change all letters to lowercase
         }
@@ -62,10 +62,10 @@ void Keywords::readBookFile(char *fileName) {
 
 void Keywords::printOutputFile(ofstream &outputFile) {
     map<DSString, DSVector<DSString>>::iterator it;    // create a map for the keyword and its pageNumbers
-    it = keywordsAndPageNumbers.begin();
     char currentHeader = ' ';       // current header is nothing
     // iterate through the map
     for (it = keywordsAndPageNumbers.begin(); it != keywordsAndPageNumbers.end(); it++) {
+        DSString lastPageNumberRecorded = "-1";     // temporary variable
         char firstLetterOfKeyword = DSString::toUpperCase(it->first[0]);    // capitalize the first letter of keyword
         if (currentHeader != firstLetterOfKeyword) {    // if currentHeader does not equal the firstLetterOfKeyword
             outputFile << "[" << firstLetterOfKeyword << "]" << endl;   // print the capitalized firstLetterofKeyword
@@ -73,11 +73,15 @@ void Keywords::printOutputFile(ofstream &outputFile) {
         }
         outputFile << it->first << ": ";
         for (int i = 0; i < it->second.getVectorSize() - 1; ++i) {      // iterate through the vector of pageNumbers
-            outputFile << it->second[i] << ", ";    // print the pageNumbers followed by a comma
+            if (lastPageNumberRecorded != it->second[i]) {         // if the last page number != page number
+                outputFile << it->second[i] << ", ";        // print the pageNumbers followed by a comma
+                lastPageNumberRecorded = it->second[i];     // update the last page number variable
+            }
         }
-        outputFile << it->second[it->second.getVectorSize() - 1];
+        if (lastPageNumberRecorded != it->second[it->second.getVectorSize() - 1]) {
+            outputFile << it->second[it->second.getVectorSize() - 1];
+        }
         outputFile << endl;
-
     }
 }
 // create a currentLetter variable that holds the contents within the bracket of the header

@@ -20,7 +20,7 @@ DSString::DSString(const DSString &anotherDSString) {  // copy constructor
     word = new char[strlen(anotherDSString.word) + 1];
     // copying anotherDSString.word to word
     strcpy(word, anotherDSString.word);
-    word[strlen(anotherDSString.word)] = '\0';
+    //word[strlen(anotherDSString.word)] = '\0';
 }
 
 DSString::~DSString() {  // destructor
@@ -37,8 +37,10 @@ DSString &DSString::operator=(const char * anotherWord) {
 // overload assignment operator
 DSString &DSString::operator=(const DSString &anotherDSString) {
     // allocate memory for private data members +1 for null terminator
-    word = new char[strlen(anotherDSString.word) + 1];
-    strcpy(word, anotherDSString.word);
+    if (anotherDSString.word != nullptr) {
+        word = new char[strlen(anotherDSString.word) + 1];
+        strcpy(word, anotherDSString.word);
+    }
     return *this;
 }
 
@@ -140,5 +142,9 @@ char DSString::toUpperCase(char letter) {
 
 char DSString::toLowerCase(char letter) {
     return tolower(letter);
+}
+
+bool DSString::operator!=(const DSString &rightSide) const {
+    return strcmp(word, rightSide.word) != 0;
 }
 
