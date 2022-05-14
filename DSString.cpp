@@ -147,4 +147,3 @@ char DSString::toLowerCase(char letter) {
 bool DSString::operator!=(const DSString &rightSide) const {
     return strcmp(word, rightSide.word) != 0;
 }
-

@@ -136,4 +136,5 @@ public:
     static char toUpperCase(char);
     static char toLowerCase(char);
 };
+
 #endif //PA01_SENTIMENT_DSSTRING_H

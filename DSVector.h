@@ -113,7 +113,4 @@ public:
 // ***read in the second file first to know keywords and multiple worded keywords -> compare to file 1
 // main should have < 50 lines.
 
-
-
-
 #endif //INC_21F_PA02_DSVECTOR_H
